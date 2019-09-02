@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import DateInput from "./components/DateInput/DateInput.component";
 import Photo from "./components/Photo/Photo.component";
 import moment from "moment";
@@ -6,55 +6,65 @@ import momentRandom from "moment-random";
 import { AppContainer, Content } from "./App.styles";
 import { GlobalStyle } from "./global.styles";
 
-class App extends Component {
-  state = {
-    date: "",
-    photo: ""
-  };
+const App = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [date, setDate] = useState("");
+  const [photo, setPhoto] = useState("");
 
-  componentDidMount() {
-    fetch(
-      `https://api.nasa.gov/planetary/apod?api_key=kDfKhf1jOYIDcujWel6ycIP5Cy9obKH5imv0F3CW`
-    )
-      .then(response => response.json())
-      .then(json => this.setState({ photo: json }));
-  }
+  useEffect(() => {
+    setIsLoading(true);
+    console.log(isLoading);
+    try {
+      fetch(
+        `https://api.nasa.gov/planetary/apod?api_key=kDfKhf1jOYIDcujWel6ycIP5Cy9obKH5imv0F3CW`
+      )
+        .then(response => response.json())
+        .then(json => setPhoto(json));
+    } catch (err) {
+      console.log(err);
+    }
+    setIsLoading(false);
+    console.log(isLoading);
+  }, [isLoading]);
 
-  changeDate = dateFromInput => {
+  const changeDate = dateFromInput => {
     const formatedInput = moment(dateFromInput).format("YYYY-MM-DD");
-    this.setState({ date: dateFromInput });
-    this.getPhoto(formatedInput);
+    setDate(dateFromInput);
+    getPhoto(formatedInput);
   };
-  getPhoto = date => {
-    fetch(
-      `https://api.nasa.gov/planetary/apod?date=${date}&api_key=kDfKhf1jOYIDcujWel6ycIP5Cy9obKH5imv0F3CW`
-    )
-      .then(response => response.json())
-      .then(photoData => this.setState({ photo: photoData }));
+
+  const getPhoto = date => {
+    try {
+      fetch(
+        `https://api.nasa.gov/planetary/apod?date=${date}&api_key=kDfKhf1jOYIDcujWel6ycIP5Cy9obKH5imv0F3CW`
+      )
+        .then(response => response.json())
+        .then(photoData => setPhoto(photoData));
+    } catch (err) {
+      console.log(err);
+    }
   };
-  handleClick = () => {
+
+  const handleClick = () => {
     let randomDate = momentRandom(moment(), moment("06-16-1995", "MM-DD-YYYY"));
-    this.setState({ randomDate });
-    this.getPhoto(moment(randomDate).format("YYYY-MM-DD"));
-    console.log(moment(randomDate).format("YYYY-MM-DD"));
+    //setDate(randomDate);
+    getPhoto(moment(randomDate).format("YYYY-MM-DD"));
   };
-  render() {
-    return (
-      <>
-        <GlobalStyle />
-        <AppContainer>
-          <Content>
-            <h1>NASA's Astronomy Picture of the Day</h1>
-            <DateInput
-              changeDate={this.changeDate}
-              date={this.state.date}
-              handleClick={this.handleClick}
-            />
-            <Photo photo={this.state.photo} />
-          </Content>
-        </AppContainer>
-      </>
-    );
-  }
-}
+  return (
+    <>
+      <GlobalStyle />
+      <AppContainer>
+        <Content>
+          <h1>NASA's Astronomy Picture of the Day</h1>
+          <DateInput
+            changeDate={changeDate}
+            date={date}
+            handleClick={handleClick}
+          />
+          <Photo photo={photo} />
+        </Content>
+      </AppContainer>
+    </>
+  );
+};
 export default App;
