@@ -1,8 +1,10 @@
 {
+  "homepage": "https://github.com/topmonitoring/NASA-search",
   "name": "nasa-surch",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "gh-pages": "^2.1.1",
     "moment": "^2.24.0",
     "moment-random": "^1.0.5",
     "prop-types": "^15.7.2",
@@ -13,6 +15,8 @@
     "styled-components": "^4.3.2"
   },
   "scripts": {
+    "predeploy": "yarn run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
