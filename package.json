@@ -1,8 +1,8 @@
 {
-  "homepage": "https://github.com/topmonitoring/NASA-search",
   "name": "nasa-surch",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://github.com/topmonitoring/NASA-search",
   "dependencies": {
     "gh-pages": "^2.1.1",
     "moment": "^2.24.0",
