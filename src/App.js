@@ -29,8 +29,10 @@ const App = () => {
 
   const changeDate = dateFromInput => {
     const formatedInput = moment(dateFromInput).format("YYYY-MM-DD");
+    formatedInput > moment().format("YYYY-MM-DD")
+      ? alert("You can only search for past dates not feauture ones!")
+      : getPhoto(formatedInput);
     setDate(dateFromInput);
-    getPhoto(formatedInput);
   };
 
   const getPhoto = date => {
@@ -47,8 +49,8 @@ const App = () => {
 
   const handleClick = () => {
     let randomDate = momentRandom(moment(), moment("06-16-1995", "MM-DD-YYYY"));
-    //setDate(randomDate);
     getPhoto(moment(randomDate).format("YYYY-MM-DD"));
+    //setDate(randomDate);
   };
   return (
     <>
