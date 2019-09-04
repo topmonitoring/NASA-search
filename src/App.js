@@ -35,14 +35,19 @@ const App = () => {
 
   const getPhoto = date => {
     setIsLoading(true);
+    let cancel;
     axios
       .get(
-        `https://api.nasa.gov/planetary/apod?date=${date}&api_key=kDfKhf1jOYIDcujWel6ycIP5Cy9obKH5imv0F3CW`
+        `https://api.nasa.gov/planetary/apod?date=${date}&api_key=kDfKhf1jOYIDcujWel6ycIP5Cy9obKH5imv0F3CW`,
+        {
+          cancelToken: new axios.CancelToken(c => (cancel = c))
+        }
       )
       .then(res => {
         setIsLoading(false);
         setPhoto(res.data);
       });
+    return () => cancel();
   };
 
   const handleClick = () => {
