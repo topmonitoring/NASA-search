@@ -5,27 +5,25 @@ import moment from "moment";
 import momentRandom from "moment-random";
 import { AppContainer, Content } from "./App.styles";
 import { GlobalStyle } from "./global.styles";
+import axios from "axios";
+import Spinner from "./components/spinner/spinner.component";
 
 const App = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [date, setDate] = useState("");
   const [photo, setPhoto] = useState("");
 
   useEffect(() => {
     setIsLoading(true);
-    console.log(isLoading);
-    try {
-      fetch(
+    axios
+      .get(
         `https://api.nasa.gov/planetary/apod?api_key=kDfKhf1jOYIDcujWel6ycIP5Cy9obKH5imv0F3CW`
       )
-        .then(response => response.json())
-        .then(json => setPhoto(json));
-    } catch (err) {
-      console.log(err);
-    }
-    setIsLoading(false);
-    console.log(isLoading);
-  }, [isLoading]);
+      .then(res => {
+        setIsLoading(false);
+        setPhoto(res.data);
+      });
+  }, []);
 
   const changeDate = dateFromInput => {
     const formatedInput = moment(dateFromInput).format("YYYY-MM-DD");
@@ -36,15 +34,15 @@ const App = () => {
   };
 
   const getPhoto = date => {
-    try {
-      fetch(
+    setIsLoading(true);
+    axios
+      .get(
         `https://api.nasa.gov/planetary/apod?date=${date}&api_key=kDfKhf1jOYIDcujWel6ycIP5Cy9obKH5imv0F3CW`
       )
-        .then(response => response.json())
-        .then(photoData => setPhoto(photoData));
-    } catch (err) {
-      console.log(err);
-    }
+      .then(res => {
+        setIsLoading(false);
+        setPhoto(res.data);
+      });
   };
 
   const handleClick = () => {
@@ -63,7 +61,7 @@ const App = () => {
             date={date}
             handleClick={handleClick}
           />
-          <Photo photo={photo} />
+          {isLoading ? <Spinner /> : <Photo photo={photo} />}
         </Content>
       </AppContainer>
     </>
