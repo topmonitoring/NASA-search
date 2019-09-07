@@ -1,11 +1,18 @@
 import React from "react";
 import { Title, Details, Image, PictureContainer } from "./Photo.styles";
+import { connect } from "react-redux";
+import { selectcardData } from "../../redux/card/card.selectors";
 
-const Photo = props => (
+const Photo = ({ data }) => (
   <PictureContainer>
-    <Title>{props.photo.title}</Title>
-    <Image src={props.photo.url} alt={props.photo.title} />
-    <Details>{props.photo.explanation}</Details>
+    <Title>{data.title}</Title>
+    <Image src={data.url} alt={data.title} />
+    <Details>{data.explanation}</Details>
   </PictureContainer>
 );
-export default Photo;
+
+const mapStateToProps = state => ({
+  data: selectcardData(state)
+});
+
+export default connect(mapStateToProps)(Photo);

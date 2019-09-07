@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Background from "./assets/333.jpg";
+import Background from "../../assets/333.jpg";
 
 export const AppContainer = styled.div`
   align-content: center;
