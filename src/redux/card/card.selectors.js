@@ -12,11 +12,6 @@ export const selectCardIsLoading = createSelector(
   card => card.loading
 );
 
-export const selectCardPhoto = createSelector(
-  [selectCard],
-  card => card.photo
-);
-
 export const selectcardData = createSelector(
   [selectCard],
   card => card.cardData

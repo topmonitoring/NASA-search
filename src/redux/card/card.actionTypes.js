@@ -1,6 +1,4 @@
 export const CardActionTypes = {
-  update: "update",
-
   SET_CURRENT_CARD: "SET_CURRENT_CARD",
   SET_RANDOM_CARD: "SET_RANDOM_CARD",
   SET_CURRENT_CARD_DATE: "SET_CURRENT_CARD_DATE",

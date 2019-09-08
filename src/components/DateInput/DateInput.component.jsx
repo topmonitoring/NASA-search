@@ -1,10 +1,12 @@
 import React from "react";
 import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import { SearchBar, CustomButton } from "./Dateinput.styles";
+
 import { connect } from "react-redux";
 import { setCurrentCard, setRandomCard } from "../../redux/card/card.actions";
 import { selectCardDate } from "../../redux/card/card.selectors";
+
+import "react-datepicker/dist/react-datepicker.css";
+import { SearchBar, CustomButton } from "./Dateinput.styles";
 
 const DateInput = ({ date, setRandomCard, setCurrentCard }) => (
   <SearchBar>

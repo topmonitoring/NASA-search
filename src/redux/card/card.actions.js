@@ -1,11 +1,6 @@
 import { CardActionTypes } from "./card.actionTypes";
 import axios from "axios";
-import momentRandom from "moment-random";
 import moment from "moment";
-
-export const setUdate = () => ({
-  type: CardActionTypes.update
-});
 
 export const setInitialCardStart = () => ({
   type: CardActionTypes.SET_INITIAL_CARD_START
@@ -52,11 +47,17 @@ export const setCurrentCard = date => {
   };
 };
 
+function randomDate(start, end) {
+  return new Date(
+    start.getTime() + Math.random() * (end.getTime() - start.getTime())
+  );
+}
+
 export const setRandomCard = () => {
   return dispatch => {
-    let randomDate = momentRandom(moment(), moment("06-16-1995", "MM-DD-YYYY"));
-    dispatch(setCurrentCardDate(randomDate));
-    dispatch(fetchDataByDateAsync(moment(randomDate).format("YYYY-MM-DD")));
+    let randomDateVal = randomDate(new Date(1995, 16, 6), new Date());
+    dispatch(setCurrentCardDate(randomDateVal));
+    dispatch(fetchDataByDateAsync(moment(randomDateVal).format("YYYY-MM-DD")));
   };
 };
 

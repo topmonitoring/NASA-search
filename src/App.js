@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
-import { GlobalStyle } from "./global.styles";
+import HomePage from "./pages/home/homePage.component";
+
 import { connect } from "react-redux";
 import { setInitialCard } from "./redux/card/card.actions";
-import HomePage from "./pages/home/homePage.component";
+import { GlobalStyle } from "./global.styles";
 
 const App = ({ setInitialCard }) => {
   useEffect(() => {
