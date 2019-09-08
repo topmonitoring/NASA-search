@@ -2,15 +2,15 @@ import React, { useState, useEffect } from "react";
 import DateInput from "./components/DateInput/DateInput.component";
 import Photo from "./components/Photo/Photo.component";
 import moment from "moment";
-import momentRandom from "moment-random";
-import { AppContainer, Content } from "./App.styles";
-import { GlobalStyle } from "./global.styles";
 import axios from "axios";
 import Spinner from "./components/spinner/spinner.component";
 
+import { AppContainer, Content } from "./App.styles";
+import { GlobalStyle } from "./global.styles";
+
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState(new Date());
   const [photo, setPhoto] = useState("");
 
   useEffect(() => {
@@ -33,6 +33,12 @@ const App = () => {
     setDate(dateFromInput);
   };
 
+  function randomDate(start, end) {
+    return new Date(
+      start.getTime() + Math.random() * (end.getTime() - start.getTime())
+    );
+  }
+
   const getPhoto = date => {
     setIsLoading(true);
     let cancel;
@@ -51,9 +57,9 @@ const App = () => {
   };
 
   const handleClick = () => {
-    let randomDate = momentRandom(moment(), moment("06-16-1995", "MM-DD-YYYY"));
-    getPhoto(moment(randomDate).format("YYYY-MM-DD"));
-    //setDate(randomDate);
+    let randomDateVal = randomDate(new Date(1995, 16, 6), new Date());
+    getPhoto(moment(randomDateVal).format("YYYY-MM-DD"));
+    setDate(randomDateVal);
   };
   return (
     <>
