@@ -6,9 +6,9 @@ const DateInput = props => (
   <SearchBar>
     <span>
       Select a Date:
-      <DatePicker selected={props.date} onChange={props.changeDate} />
+      <DatePicker selected={props.date} onChange={props.checkIfDateIsValid} />
     </span>{" "}
-    <CustomButton onClick={props.handleClick}>
+    <CustomButton onClick={props.genarateRandomDate}>
       Generate Random photo
     </CustomButton>
   </SearchBar>
