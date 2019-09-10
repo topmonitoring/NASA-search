@@ -1,14 +1,16 @@
 import React, { useEffect } from "react";
 import HomePage from "./pages/home/homePage.component";
+import { createStructuredSelector } from "reselect";
 
 import { connect } from "react-redux";
-import { setInitialCard } from "./redux/card/card.actions";
+import { fetchCardAsync } from "./redux/card/card.actions";
+import { selectCardDate } from "./redux/card/card.selectors";
 import { GlobalStyle } from "./global.styles";
 
-const App = ({ setInitialCard }) => {
+export const App = ({ date, fetchCardAsync }) => {
   useEffect(() => {
-    setInitialCard();
-  }, [setInitialCard]);
+    fetchCardAsync(date);
+  }, []);
 
   return (
     <>
@@ -17,12 +19,15 @@ const App = ({ setInitialCard }) => {
     </>
   );
 };
+const mapStateToProps = createStructuredSelector({
+  date: selectCardDate
+});
 
 const mapDispatchToProps = dispatch => ({
-  setInitialCard: () => dispatch(setInitialCard())
+  fetchCardAsync: date => dispatch(fetchCardAsync(date))
 });
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(App);

@@ -8,7 +8,7 @@ import { selectCardDate } from "../../redux/card/card.selectors";
 import "react-datepicker/dist/react-datepicker.css";
 import { SearchBar, CustomButton } from "./Dateinput.styles";
 
-const DateInput = ({ date, setRandomCard, setCurrentCard }) => (
+export const DateInput = ({ date, setRandomCard, setCurrentCard }) => (
   <SearchBar>
     <span>
       Select a Date:

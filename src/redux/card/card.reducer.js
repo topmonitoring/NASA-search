@@ -9,21 +9,18 @@ const INITIAL_STATE = {
 
 const cardReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case CardActionTypes.SET_INITIAL_CARD_START:
-    case CardActionTypes.FETCH_DATABYDATE_START:
+    case CardActionTypes.FETCH_CARD_START:
       return {
         ...state,
         loading: true
       };
-    case CardActionTypes.SET_INITIAL_CARD_FAILURE:
-    case CardActionTypes.FETCH_DATABYDATE_FAILURE:
+    case CardActionTypes.FETCH_CARD_FAILURE:
       return {
         ...state,
         loading: false,
         error: action.payload.error
       };
-    case CardActionTypes.SET_INITIAL_CARD_SUCCESS:
-    case CardActionTypes.FETCH_DATABYDATE_SUCCESS:
+    case CardActionTypes.FETCH_CARD_SUCCESS:
       return {
         ...state,
         loading: false,

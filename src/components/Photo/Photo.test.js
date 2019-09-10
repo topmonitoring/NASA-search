@@ -1,17 +1,18 @@
 import React from "react";
-import { App } from "./App";
+import { Photo } from "./Photo.component";
 import { shallow } from "enzyme";
 
-//TODO add store mock
 let wrapper;
 beforeEach(() => {
   const mockProps = {
     date: "22-11-2018",
-    fetchCardAsync: jest.fn()
+    title: "title",
+    url: "",
+    explanation: ""
   };
-  wrapper = shallow(<App {...mockProps} />);
+  wrapper = shallow(<Photo data={mockProps} />);
 });
 
-it("renders App component", () => {
+it("renders Photo component", () => {
   expect(wrapper).toMatchSnapshot();
 });

@@ -3,7 +3,7 @@ import { Title, Details, Image, PictureContainer } from "./Photo.styles";
 import { connect } from "react-redux";
 import { selectcardData } from "../../redux/card/card.selectors";
 
-const Photo = ({ data }) => (
+export const Photo = ({ data }) => (
   <PictureContainer>
     <Title>{data.title}</Title>
     <Image src={data.url} alt={data.title} />
