@@ -8,7 +8,7 @@ import {
 
 const INITIAL_STATE = {
   cardData: null,
-  date: new Date(), //dont know how to get date xD
+  date: null, //dont know how to get date xD
   loading: true,
   error: null
 };
